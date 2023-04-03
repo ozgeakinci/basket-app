@@ -1,6 +1,7 @@
 import {
   Container,
   Drawer,
+  Indicator,
   SimpleGrid,
   List,
   ThemeIcon,
@@ -38,7 +39,9 @@ const App = () => {
         <Input.Wrapper label="Filter">
           <Input value={value} onChange={(e) => setValue(e.target.value)} />
           <Button onClick={() => setValue("")}>Delete</Button>
+          <Indicator inline label={basketItems.length} size={22} color="red" >
           <Button onClick={()=> setOpened(true)}>Sepet</Button>
+          </Indicator>
         </Input.Wrapper>
       </SimpleGrid>
 
