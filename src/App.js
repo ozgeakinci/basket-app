@@ -1,4 +1,11 @@
-import { Container, SimpleGrid, List, ThemeIcon, Input } from "@mantine/core";
+import {
+  Container,
+  SimpleGrid,
+  List,
+  ThemeIcon,
+  Input,
+  Button,
+} from "@mantine/core";
 import { IconCircleCheck } from "@tabler/icons-react";
 import "./App.css";
 import Card from "./components/Card";
@@ -24,10 +31,12 @@ const App = () => {
 
   return (
     <Container>
-
-      <Input.Wrapper label="Filter" onChange={(e) => setValue(e.target.value)}>
-        <Input />
-      </Input.Wrapper>
+      <SimpleGrid>
+        <Input.Wrapper label="Filter">
+          <Input value={value} onChange={(e) => setValue(e.target.value)} />
+          <Button onClick={() => setValue("")}>Delete</Button>
+        </Input.Wrapper>
+      </SimpleGrid>
 
       <SimpleGrid cols={3} className="Padding">
         {filteredItems.map(({ name, src, price }) => (
@@ -61,4 +70,3 @@ const App = () => {
 };
 
 export default App;
-

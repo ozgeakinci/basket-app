@@ -1,4 +1,4 @@
-import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
+import { Card, Image, Text, Button, Group, } from "@mantine/core";
 
 const CardComponent = ({ name, onAdd, price, src }) => {
   return (
@@ -14,9 +14,9 @@ const CardComponent = ({ name, onAdd, price, src }) => {
 
         <Group position="apart" mt="md" mb="xs">
           <Text weight={500}>{name}</Text>
-          <Badge color="pink" variant="light">
+          {/* <Badge color="pink" variant="light">
             {price}
-          </Badge>
+          </Badge> */}
         </Group>
 
         <Text size="sm" color="dimmed">
