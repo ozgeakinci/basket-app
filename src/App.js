@@ -6,26 +6,31 @@ import { useState } from "react";
 
 let storeItems = [
   { name: "Kamera", src: "camera", price: 20 },
-  { name: "Kaktüs", src:"flowers",  price: 15 },
-  { name: "Apple Akıllı Saat", src :"iwatch" , price: 25 },
-  { name: "Ruj", src :"lipstick" , price: 25 },
-  { name: "Hoparlör", src :"speaker" , price: 25 },
-  { name: "Saat", src :"watch" , price: 25 },
+  { name: "Kaktüs", src: "flowers", price: 15 },
+  { name: "Apple Akıllı Saat", src: "iwatch", price: 25 },
+  { name: "Ruj", src: "lipstick", price: 25 },
+  { name: "Hoparlör", src: "speaker", price: 25 },
+  { name: "Saat", src: "watch", price: 25 },
 ];
 
 const App = () => {
   const [basketItems, setBasketItems] = useState([]);
   const [value, setValue] = useState("");
 
-  const filteredItems = basketItems.filter(
+  const filteredItems = storeItems.filter(
     (item) =>
       item.name.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) >= 0
   );
 
   return (
     <Container>
+
+      <Input.Wrapper label="Filter" onChange={(e) => setValue(e.target.value)}>
+        <Input />
+      </Input.Wrapper>
+
       <SimpleGrid cols={3} className="Padding">
-        {storeItems.map(({ name, src, price }) => (
+        {filteredItems.map(({ name, src, price }) => (
           <Card
             key={name}
             name={name}
@@ -35,9 +40,6 @@ const App = () => {
           />
         ))}
       </SimpleGrid>
-      <Input.Wrapper label="Filter" onChange={(e) => setValue(e.target.value)}>
-        <Input />
-      </Input.Wrapper>
 
       <List
         className="Padding"
@@ -50,7 +52,7 @@ const App = () => {
           </ThemeIcon>
         }
       >
-        {filteredItems.map(({ name }, index) => (
+        {basketItems.map(({ name }, index) => (
           <List.Item key={index}>{name}</List.Item>
         ))}
       </List>
@@ -59,3 +61,4 @@ const App = () => {
 };
 
 export default App;
+
