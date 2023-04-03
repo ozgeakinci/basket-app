@@ -5,30 +5,37 @@ import Card from "./components/Card";
 import { useState } from "react";
 
 let storeItems = [
-  { name: "Küpe", price: 20 },
-  { name: "Bileklik", price: 15 },
-  { name: "Halhal", price: 25 },
+  { name: "Kamera", src: "camera", price: 20 },
+  { name: "Kaktüs", src:"flowers",  price: 15 },
+  { name: "Apple Akıllı Saat", src :"iwatch" , price: 25 },
+  { name: "Ruj", src :"lipstick" , price: 25 },
+  { name: "Hoparlör", src :"speaker" , price: 25 },
+  { name: "Saat", src :"watch" , price: 25 },
 ];
 
 const App = () => {
   const [basketItems, setBasketItems] = useState([]);
-  const [value , setValue] = useState('')
+  const [value, setValue] = useState("");
 
-  const filteredItems = basketItems.filter(item => item.name.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) >= 0)
+  const filteredItems = basketItems.filter(
+    (item) =>
+      item.name.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) >= 0
+  );
 
   return (
     <Container>
       <SimpleGrid cols={3} className="Padding">
-        {storeItems.map(({ name, price }) => (
+        {storeItems.map(({ name, src, price }) => (
           <Card
             key={name}
             name={name}
+            src={src}
             price={price}
             onAdd={() => setBasketItems([...basketItems, { name }])}
           />
         ))}
       </SimpleGrid>
-      <Input.Wrapper label="Filter" onChange={(e)=>setValue(e.target.value)}>
+      <Input.Wrapper label="Filter" onChange={(e) => setValue(e.target.value)}>
         <Input />
       </Input.Wrapper>
 
