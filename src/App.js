@@ -2,17 +2,17 @@ import {
   Container,
   Drawer,
   Indicator,
+  Group,
   SimpleGrid,
   List,
   ThemeIcon,
   Input,
   Button,
 } from "@mantine/core";
-import { IconCircleCheck } from "@tabler/icons-react";
+import { IconCircleCheck, IconShoppingCart } from "@tabler/icons-react";
 import "./App.css";
 import Card from "./components/Card";
 import { useState } from "react";
-
 
 let storeItems = [
   { name: "Kamera", src: "camera", price: 20 },
@@ -26,7 +26,7 @@ let storeItems = [
 const App = () => {
   const [basketItems, setBasketItems] = useState([]);
   const [value, setValue] = useState("");
-  const [opened, setOpened ] = useState(false)
+  const [opened, setOpened] = useState(false);
 
   const filteredItems = storeItems.filter(
     (item) =>
@@ -35,17 +35,40 @@ const App = () => {
 
   return (
     <Container>
-      <SimpleGrid>
-        <Input.Wrapper label="Filter">
-          <Input value={value} onChange={(e) => setValue(e.target.value)} />
-          <Button onClick={() => setValue("")}>Delete</Button>
-          <Indicator inline label={basketItems.length} size={22} color="red" >
-          <Button onClick={()=> setOpened(true)}>Sepet</Button>
-          </Indicator>
-        </Input.Wrapper>
-      </SimpleGrid>
+      <Group align="end">
+      
+          <Input.Wrapper label="Filter">
+            <Input value={value} onChange={(e) => setValue(e.target.value)} />
+            </Input.Wrapper>
+            <Button className="btn" onClick={() => setValue("")}>
+              Delete
+            </Button>
+            <Indicator
+              className="indicator"
+              inline
+              label={basketItems.length}
+              size={22}
+              color="red"
+            > <Button>
+              <IconShoppingCart
+                className="shop"
+                onClick={() => setOpened(true)}
+                size="1.4rem"
+              ></IconShoppingCart>
+              </Button>
+            </Indicator>
+          
+          </Group>
 
-      <SimpleGrid cols={3} className="Padding">
+      <SimpleGrid
+        cols={3}
+        className="Padding"
+        breakpoints={[
+          { maxWidth: "62rem", cols: 3, spacing: "md" },
+          { maxWidth: "48rem", cols: 2, spacing: "sm" },
+          { maxWidth: "36rem", cols: 1, spacing: "sm" },
+        ]}
+      >
         {filteredItems.map(({ name, src, price }) => (
           <Card
             key={name}
@@ -53,12 +76,16 @@ const App = () => {
             src={src}
             price={price}
             onAdd={() => setBasketItems([...basketItems, { name }])}
-          
           />
         ))}
       </SimpleGrid>
 
-      <Drawer position="right" opened={opened} onClose={()=> setOpened(false)} title="Sepetim" >
+      <Drawer
+        position="right"
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title="Sepetim"
+      >
         <List
           className="Padding"
           spacing="xs"
